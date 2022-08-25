@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
 
@@ -61,7 +62,6 @@ class DoctorController extends Controller
     {
         $doctor = Doctor::query()
             ->select("doctor.id as id", "doctor.name as name","doctor.surname as surname","doctor.profession as profession")
-//            ->join("users","users.id","=","todos.user_id")
             ->where("id","=",$id)->first();
         return \view("admin.doctor.profile",compact("doctor"));
     }

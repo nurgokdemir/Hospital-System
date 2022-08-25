@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Patient;
+use App\Http\Controllers\Controller;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 
-class PatientController extends Controller
+class AppointmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,11 @@ class PatientController extends Controller
      */
     public function index()
     {
-        dd(123);
+        $appointment = Appointment::query()
+            ->select("appointment.")
+            ->join()
+            ->get();
+       return view('welcome',compact("appointment"));
     }
 
     /**
@@ -35,16 +40,20 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $appointment = new Appointment();
+        $appointment->customer_full_name = $request->customer_name;
+        $appointment->customer_mail = $request->mail;
+        $appointment->appointment_date = $request->date;
+        $appointment->customer_message = $request->message;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Patient  $patient
+     * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function show(Patient $patient)
+    public function show(Appointment $appointment)
     {
         //
     }
@@ -52,10 +61,10 @@ class PatientController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Patient  $patient
+     * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Patient $patient)
+    public function edit(Appointment $appointment)
     {
         //
     }
@@ -64,10 +73,10 @@ class PatientController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Patient  $patient
+     * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patient $patient)
+    public function update(Request $request, Appointment $appointment)
     {
         //
     }
@@ -75,10 +84,10 @@ class PatientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Patient  $patient
+     * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Patient $patient)
+    public function destroy(Appointment $appointment)
     {
         //
     }

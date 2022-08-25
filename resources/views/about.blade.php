@@ -1,6 +1,6 @@
-@extends('layouts.app')
 
-@section('content')
+
+
     <div id="about" class="section  wow fadeIn">
         <br><br><br><br>
         <div class="container">
@@ -33,4 +33,4 @@
         </div>
         <!-- end container -->
     </div>
-@endsection
+

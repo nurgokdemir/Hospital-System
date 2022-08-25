@@ -17,8 +17,10 @@
     </head>
     <body>
     <div class="row">
+
         @foreach($doctors as $doctor)
             <div class="col-3">
+
                 <div class="card-group">
                     <div class="card" style="width:400px">
                         <img class="card-img-top" src="/image/doctor_01.jpg" alt="Card image" style="width:70%">

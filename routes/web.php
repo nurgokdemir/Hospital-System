@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AppointmentController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\Admin\DoctorController;
+use App\Http\Controllers\Admin\PatientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,18 +17,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');*/
 
+Route::get("/",[\App\Http\Controllers\HomeController::class,"store"])->name("welcome");
 
-Route::get("doctors", function () {
+/*Route::get("doctors", function () {
     return view('doctors');
-})->name('doctors');
+})->name('doctors');*/
 
-Route::get('/contact', function () {
+Route::get("/doctors",[\App\Http\Controllers\UsdocController::class,"index"])->name("doctors");
+Route::get("/doctors/profile/{id}",[\App\Http\Controllers\UsdocController::class,"show"])->name("profile");
+
+Route::get('contact', function () {
     return view('contact');
-});
+})->name('contact');
+
+Route::get('about', function () {
+    return view('about');
+})->name('about');
 
 Route::prefix("admin")->name("admin.")->middleware(["auth"])->group(function () {
 
@@ -39,7 +49,7 @@ Route::prefix("admin")->name("admin.")->middleware(["auth"])->group(function () 
     Route::post("/doctor/update/{id}",[DoctorController::class,"update"])->name("doctor.update");
     Route::get("/doctor/delete/{id}",[DoctorController::class,"destroy"])->name("doctor.destroy");
     Route::get("/patient",[ PatientController::class,"index"])->name("patient.index");
-
+    Route::get("/appointment",[AppointmentController::class,"index"])->name("appointment.index");
 });
 
 require __DIR__ . '/auth.php';
